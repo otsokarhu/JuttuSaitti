@@ -1,46 +1,27 @@
-<!DOCTYPE html>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>JuttuSaitti</title>
-<body style="background: linear-gradient(#e66465, #9198e5); font-family:Courier New, Courier, Lucida Sans Typewriter, Lucida Typewriter, monospace; height: 100vh;">
-  <center>
-    <div class="header">
-      <h1 style="border: rgb(0, 0, 0); border-radius: 10px;">Juttusaitti</h1>
-      <h2>Tervetuloa juttusaitille</h2>
-    </div>
-    <div class="topnav">
-      <a href="/">Etusivu</a>
-      <a href="/login">Kirjaudu sisään</a>
-      <a href="/register">Rekisteröidy</a>
-      <a href="/about">Tietoa</a>
-      <a href="/contact">Ota yhteyttä</a>
-    </div>
+{% extends "base.html" %}
+{% block title %}<h2>Kirjaudu JuttuSaitille </h2>{% endblock %}
+{% block content %}
+<form action="/login" method="post" >
+  <div class="container" style="padding: 30px;">
+    <p>
+    <label for="uname"><b>Käyttäjänimi</b></label>
+    <input type="text" placeholder="Käyttäjänimi" name="uname" required>
+    </p>
 
+    <p>
+    <label for="psw"><b>Salasana</b></label>
+    <input type="password" placeholder="Salasana" name="psw" required>
+    </p>
 
-
-
-    <form action="/login" method="post" >
-      <div class="container" style="padding: 30px;">
-        <label for="uname"><b>Käyttäjänimi</b></label>
-        <input type="text" placeholder="Käyttäjänimi" name="uname" required>
+    <p>
+    <button type="submit">Kirjaudu sisään</button>
+    </p>
     
-        <label for="psw"><b>Salasana</b></label>
-        <input type="password" placeholder="Salasana" name="psw" required>
-    
-        <button type="submit">Kirjaudu sisään</button>
-        
-      </div>
-    
-      <div class="container">
-        <button type="button" class="register" href="/register">Rekisteröidy</button>
-        
-      </div>
-    
-    
-        
-    </form>
+  </div>
 
-  </center>
+  <div class="container">
+    <button type="button" class="register" href="/register">Rekisteröidy</button>
+  </div>        
+</form>
+{% endblock %}
 
-
-
-</body>

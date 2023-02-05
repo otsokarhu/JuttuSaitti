@@ -1,31 +1,14 @@
-<!DOCTYPE html>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>JuttuSaitti</title>
-<body style="background: linear-gradient(#e66465, #9198e5); height: 100vh; font-family:Courier New, Courier, Lucida Sans Typewriter, Lucida Typewriter, monospace">
-  <center>
-    <div class="header">
-      <h1 style="border: rgb(0, 0, 0); border-radius: 10px;">Juttusaitti</h1>
-      <h2>Tervetuloa juttusaitille</h2>
-    </div>
-    <div class="topnav">
-      <a href="/">Etusivu</a>
-      <a href="/login">Kirjaudu sisään</a>
-      <a href="/register">Rekisteröidy</a>
-      <a href="/about">Tietoa</a>
-      <a href="/contact">Ota yhteyttä</a>
+{% extends "base.html" %}
+{% block title %}<h2>Lisää uusi Juttu </h2>{% endblock %}
+{% block content %}
+<form action="/add-post" method="post">
+  <input type="text" name="title" placeholder="Otsikko" required>
+  <br>
+  <textarea name="content" placeholder="Juttu" required></textarea>
+  <br>
+  <input type="submit" value="Lisää Juttu">
+</form>
+{% endblock %}
 
-   
-  <h3>Lisää uusi juttu</h3>
 
-  <form action="/add-post" method="post">
-    <input type="text" name="title" placeholder="Otsikko" required>
-    <br>
-    <textarea name="content" placeholder="Juttu" required></textarea>
-    <br>
-    <input type="submit" value="Lisää Juttu">
-  </form>
 
-   
-   
-  </center>
-</body>

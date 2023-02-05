@@ -1,31 +1,28 @@
-<!DOCTYPE html>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>JuttuSaitti</title>
-<body style="background: linear-gradient(#e66465, #9198e5); font-family:Courier New, Courier, Lucida Sans Typewriter, Lucida Typewriter, monospace; height: 100vh;">
-  <center>
-    <div class="header">
-      <h1 style="border: rgb(0, 0, 0); border-radius: 10px;">Juttusaitti</h1>
-      <h2>Tervetuloa juttusaitille</h2>
-    </div>
-    <div class="topnav">
-      <a href="/">Etusivu</a>
-      <a href="/login">Kirjaudu sisään</a>
-      <a href="/register">Rekisteröidy</a>
-      <a href="/about">Tietoa</a>
-      <a href="/contact">Ota yhteyttä</a>
-    </div>
+{% extends "base.html" %}
+{% block title %}<h2>Rekisteröidy JuttuSaitille </h2>{% endblock %}
+
+{% block content %}
    
   <form action="/register" method="post">
     <div class="container" style="padding: 30px; ">
+      <p>
       <label for="uname"><b>Käyttäjänimi</b></label>
-      <input type="text" placeholder="Käyttäjänimi" name="uname" required>
+      <input style="width: 200px" type="text" minlength="4" placeholder="Käyttäjänimi, vähintään 4 merkkiä" name="uname" required>
+      </p>
 
+      <p>
       <label for="psw"><b>Salasana</b></label>
-      <input type="password" placeholder="Salasana" name="psw" required>
+      <input style="width: 200px" type="password" minlength="6" placeholder="Salasana, vähintään 6 merkkiä" name="psw" required>
+      </p>
 
+      <p>
+      <label for="psw-repeat"><b>Toista salasana</b></label>
+      <input style="width: 200px" type="password" minlength="6" placeholder="Toista salasana" name="psw-repeat" required>
+      </p>
 
-
+      <p>
       <button type="submit">Rekisteröidy</button>
+      </p>
 
     </div>
 
@@ -35,6 +32,27 @@
     </div>
 
   </form>
-   
   </center>
+  <script>
+    function validate(form) {
+
+      if (form.psw.value != form.psw-repeat.value) {
+        alert("Salasanat eivät täsmää!");
+        return false;
+      } if (form.psw.value.length < 6) {
+        alert("Salasanan täytyy olla vähintään 6 merkkiä pitkä!");
+        return false;
+      } if (form.uname.value.length < 4) {
+        alert("Käyttäjänimen täytyy olla vähintään 4 merkkiä pitkä!");
+        return false;
+      } else {
+        return true;
+      }
+    }
+
+      
+
+  </script>
   </body>
+
+{% endblock %}
