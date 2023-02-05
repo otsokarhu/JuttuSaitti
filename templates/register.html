@@ -6,22 +6,22 @@
   <form action="/register" method="post">
     <div class="container" style="padding: 30px; ">
       <p>
-      <label for="uname"><b>Käyttäjänimi</b></label>
-      <input style="width: 200px" type="text" minlength="4" placeholder="Käyttäjänimi, vähintään 4 merkkiä" name="uname" required>
+      <label for="username"><b>Käyttäjänimi</b></label>
+      <input style="width: 200px" type="text" minlength="4" placeholder="Käyttäjänimi, vähintään 4 merkkiä" name="username" required>
       </p>
 
       <p>
-      <label for="psw"><b>Salasana</b></label>
-      <input style="width: 200px" type="password" minlength="6" placeholder="Salasana, vähintään 6 merkkiä" name="psw" required>
+      <label for="password"><b>Salasana</b></label>
+      <input style="width: 200px" type="password" minlength="6" placeholder="Salasana, vähintään 6 merkkiä" name="password" required>
       </p>
 
       <p>
-      <label for="psw-repeat"><b>Toista salasana</b></label>
-      <input style="width: 200px" type="password" minlength="6" placeholder="Toista salasana" name="psw-repeat" required>
+      <label for="password-repeat"><b>Toista salasana</b></label>
+      <input style="width: 200px" type="password" minlength="6" placeholder="Toista salasana" name="password-repeat" required>
       </p>
 
       <p>
-      <button type="submit">Rekisteröidy</button>
+      <input type="submit" value="Rekisteröidy">
       </p>
 
     </div>
@@ -36,19 +36,19 @@
   <script>
     function validate(form) {
 
-      if (form.psw.value != form.psw-repeat.value) {
+      if (form.p.value != form.password-repeat.value) {
         alert("Salasanat eivät täsmää!");
         return false;
-      } if (form.psw.value.length < 6) {
+      } if (form.password.value.length < 6) {
         alert("Salasanan täytyy olla vähintään 6 merkkiä pitkä!");
         return false;
-      } if (form.uname.value.length < 4) {
+      } if (form.username.value.length < 4) {
         alert("Käyttäjänimen täytyy olla vähintään 4 merkkiä pitkä!");
         return false;
-      } if (form.uname.value.length == 0) {
+      } if (form.username.value.length == 0) {
         alert("Käyttäjänimi ei voi olla tyhjä!");
         return false;
-      } if (form.psw.value.length == 0) {
+      } if (form.password.value.length == 0) {
         alert("Salasana ei voi olla tyhjä!");
         return false;
       }  else {

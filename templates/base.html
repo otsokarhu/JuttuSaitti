@@ -7,12 +7,24 @@
     <h1 style="border: rgb(0, 0, 0); border-radius: 10px;">Juttusaitti</h1>
     {% block title %}{% endblock %}
   </div>
+
+  {% if session.user_id %}
+    <p>Kirjautunut käyttäjänä {{ session.user_id }}</p>
+    <a href="/">Etusivu</a>
+    <a href="/logout">Kirjaudu ulos</a>
+    <a href="/add">Lisää Juttu</a>
+    <a href="/about">Tietoa</a>
+    <a href="/contact">Ota yhteyttä</a>
+  {% else %}
+
   <div class="topnav">
     <a href="/">Etusivu</a>
     <a href="/login">Kirjaudu sisään</a>
     <a href="/register">Rekisteröidy</a>
     <a href="/about">Tietoa</a>
     <a href="/contact">Ota yhteyttä</a>
+
+    {% endif %}
 
 
    <p>{% block content %}{% endblock %}</p>
