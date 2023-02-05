@@ -14,9 +14,18 @@ def about():
     return render_template('about.html')
 
 
-@app.route('/login')
+@app.route('/login', methods=['GET', 'POST'])
 def login():
-    return render_template('login.html')
+
+    if request.method == 'GET':
+        return render_template('login.html')
+
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        if not users.login(username, password):
+            return render_template('error.html', message="Väärä käyttäjätunnus tai salasana", route="/login")
+        return redirect('/')
 
 
 @app.route('/register', methods=['GET', 'POST'])
@@ -27,9 +36,9 @@ def register():
 
     if request.method == 'POST':
 
-        username = request.form['uname']
-        password = request.form['psw']
-        password2 = request.form['psw-repeat']
+        username = request.form['username']
+        password = request.form['password']
+        password2 = request.form['password-repeat']
         if password != password2:
             return render_template('error.html', message="Passwords do not match", route="/register")
         if len(username) < 4:
@@ -52,6 +61,13 @@ def contact():
     return render_template('contact.html')
 
 
-@app.route('/add-post')
+@app.route('/add-post', methods=['GET', 'POST'])
 def add_post():
-    return render_template('add_post.html')
+    if request.method == 'GET':
+        return render_template('add_post.html')
+
+
+@app.route('/logout')
+def logout():
+    users.logout()
+    return redirect('/')

@@ -13,16 +13,16 @@ CREATE TABLE topic (
     id SERIAL PRIMARY KEY,
     name TEXT,
     content TEXT,
-    category_id INTEGER REFERENCES category
-    created_at TIMESTAMP DEFAULT NOW()
+    category_id INTEGER REFERENCES category,
+    times TIMESTAMP DEFAULT NOW(),
     created_by INTEGER REFERENCES users
 );
 
 CREATE TABLE comment (
     id SERIAL PRIMARY KEY,
     content TEXT,
-    topic_id INTEGER REFERENCES topic
-    created_at TIMESTAMP DEFAULT NOW()
+    topic_id INTEGER REFERENCES topic,
+    times TIMESTAMP DEFAULT NOW(),
     created_by INTEGER REFERENCES users
 );
 
