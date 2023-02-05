@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>JuttuSaitti</title>
+<body style="background: linear-gradient(#e66465, #9198e5); font-family:Courier New, Courier, Lucida Sans Typewriter, Lucida Typewriter, monospace; height: 100vh;">
+<center>
+  <div class="header">
+    <h1 style="border: rgb(0, 0, 0); border-radius: 10px;">Juttusaitti</h1>
+    <h2>Tervetuloa juttusaitille</h2>
+  </div>
+  <div class="topnav">
+    <a href="/">Etusivu</a>
+    <a href="/login">Kirjaudu sisään</a>
+    <a href="/register">Rekisteröidy</a>
+    <a href="/about">Tietoa</a>
+    <a href="/contact">Ota yhteyttä</a>
+ 
+  <h4>Lähetä palautetta sivustosta!</h4>
+
+  <form action="/contact" method="post">
+    <p>
+    <label for="name">Nimi</label>
+    <input type="text" id="name" name="name" placeholder="Nimesi">
+    </p>
+
+    <p>
+    <label for="email">Sähköposti</label>
+    <input type="text" id="email" name="email" placeholder="Sähköposti-osoitteesi">
+    </p>
+
+    <p>
+    <label for="subject">Aihe</label>
+    </p>
+    <p>
+    <textarea id="subject" name="subject" placeholder="Aihe.." style="height:200px"></textarea>
+    </p>
+
+    <p>
+    <input type="submit" value="Lähetä">
+    </p>
+  </form>
+
+</center>
+
+</body>
