@@ -45,7 +45,13 @@
       } if (form.uname.value.length < 4) {
         alert("Käyttäjänimen täytyy olla vähintään 4 merkkiä pitkä!");
         return false;
-      } else {
+      } if (form.uname.value.length == 0) {
+        alert("Käyttäjänimi ei voi olla tyhjä!");
+        return false;
+      } if (form.psw.value.length == 0) {
+        alert("Salasana ei voi olla tyhjä!");
+        return false;
+      }  else {
         return true;
       }
     }
