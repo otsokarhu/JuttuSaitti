@@ -9,3 +9,20 @@ better environment for the app
 contact page
 etc
 
+How to start it:
+
+1. git clone this repository
+2. create .env file, with:<br>
+      DATABASE_URL= local database<br>
+      SECRET_KEY= secret key<br>
+
+3. Activate virtual environment: <br>
+      $ python3 -m venv venv<br>
+      $ source venv/bin/activate<br>
+      $ pip install -r ./requirements.txt<br>
+      
+4. Make the database:<br>
+      $ psql < schema.sql
+                         
+5. Run the application:<br>
+      $ flask run
