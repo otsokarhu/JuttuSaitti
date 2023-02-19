@@ -9,10 +9,10 @@
   </div>
 
   {% if session.user_id %}
-    <p>Kirjautunut käyttäjänä {{ session.user_id }}</p>
+    <p>{{ session.user_name }} kirjatuneena sisään</p>
     <a href="/">Etusivu</a>
     <a href="/logout">Kirjaudu ulos</a>
-    <a href="/add">Lisää Juttu</a>
+    <a href="/categories">Jutut</a>
     <a href="/about">Tietoa</a>
     <a href="/contact">Ota yhteyttä</a>
   {% else %}

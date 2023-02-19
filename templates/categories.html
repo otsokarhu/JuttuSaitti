@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}<h2>Juttu-kategoriat </h2>{% endblock %}
+{% block content %}
+<div class="container">
+  
+  {% if not categories %}
+<h1 class="text-centered"> Ei vielä Juttuja lisättynä :( </h1>
+{% endif %}
+
+{% if categories %}
+<h2>Kategoriat</h2>
+  <p>Valitse kategoria, josta haluat lukea juttuja.</p>
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Kategoria</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for category in categories %}
+      <tr>
+        <td><a href="/category/{{ category.id }}">{{ category.name }}</a></td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endif %}
+<a href="/category/add">Lisää JuttuKategoria</a>
+
+</div>
+{% endblock %}
+
+
+

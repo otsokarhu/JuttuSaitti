@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}<h2>Lisää uusi kategoria </h2>{% endblock %}
+{% block content %}
+{% if session.user_id %}
+  <form action="/category/add" method="post" >
+    <div class="container" style="padding: 30px;">
+      <p>
+      <label for="name"><b>Kategorian nimi</b></label>
+      <input type="text" placeholder="Kategorian nimi" name="name" required>
+      </p>
+   
+      <p>
+      <button type="submit">Lisää kategoria</button>
+      </p>
+       
+    </div>
+          
+  </form>
+{% else %}
+  <p>Rekisteröidy tai kirjaudu sisään, jotta voit lisätä uuden kategorian!</p>
+{% endif %}
+{% endblock %}
+
+  
