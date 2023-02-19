@@ -35,6 +35,16 @@ def login(username, password):
         return True
 
 
+def get_user_id():
+    return session.get("user_id", 0)
+
+
+def get_username(id):
+    sql = text("SELECT username FROM users WHERE id=:id")
+    result = db.session.execute(sql, {"id": id})
+    return result.fetchone()[0]
+
+
 def logout():
     del session["user_id"]
     del session["csrf_token"]

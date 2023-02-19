@@ -5,14 +5,11 @@
 <center>
   <div class="header">
     <h1 style="border: rgb(0, 0, 0); border-radius: 10px;">Juttusaitti</h1>
-    {% block title %}{% endblock %}
-  </div>
-
-  {% if session.user_id %}
+    {% if session.user_id %}
     <p>{{ session.user_name }} kirjatuneena sisään</p>
     <a href="/">Etusivu</a>
     <a href="/logout">Kirjaudu ulos</a>
-    <a href="/categories">Jutut</a>
+    <a href="/categories">Juttu-kategoriat</a>
     <a href="/about">Tietoa</a>
     <a href="/contact">Ota yhteyttä</a>
   {% else %}
@@ -24,10 +21,14 @@
     <a href="/about">Tietoa</a>
     <a href="/contact">Ota yhteyttä</a>
 
-    {% endif %}
+  {% endif %}
+    {% block title %}{% endblock %}
+  </div>
+
+  
 
 
-   <p>{% block content %}{% endblock %}</p>
+  <p>{% block content %}{% endblock %}</p>
    
   
 

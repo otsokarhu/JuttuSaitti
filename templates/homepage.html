@@ -1,5 +1,10 @@
 {% extends "base.html" %}
 {% block title %}<h2>Tervetuloa JuttuSaitille </h2>{% endblock %}
 {% block content %}
+{% if not session.user_id %}
     <p>Kirjaudu sisään tai rekisteröidy, jutellaksesi muiden käyttäjien kanssa!</p>
+{% endif %}
+{% if session.user_id %}
+    <p>Tervetuloa takaisin {{session.user_name}}!</p>
+{% endif %}
 {% endblock %}

@@ -71,13 +71,15 @@ def categories():
 @app.route('/category/<int:id>', methods=['GET', 'POST'])
 def category(id):
     category = topics.get_category(id)
+    alltopics = topics.get_topics(id)
     if request.method == 'GET':
-        return render_template('category.html', category=category)
+        return render_template('category.html', category=category, topics=alltopics)
     if request.method == 'POST':
-        name = request.form['name']
+        name = request.form['title']
         content = request.form['content']
-        created_by = session['name']
-        topics.add_topic(name, content, created_by, id)
+        created_by = session['user_id']
+        category_id = id
+        topics.add_topic(name, content, category_id, created_by)
         return redirect('/category/' + str(id))
 
 
@@ -89,6 +91,20 @@ def add_category():
         name = request.form['name']
         topics.add_category(name)
         return redirect('/categories')
+
+
+@app.route('/topic/<int:id>', methods=['GET', 'POST'])
+def topic(id):
+    topic = topics.get_topic(id)
+    comments = topics.get_comments(id)
+    if request.method == 'GET':
+        return render_template('topic.html', topic=topic, comments=comments)
+    if request.method == 'POST':
+        content = request.form['content']
+        created_by = session['user_id']
+        category_id = id
+        topics.add_comment(content, category_id, created_by)
+        return redirect('/topic/' + str(id))
 
 
 @app.route('/logout')

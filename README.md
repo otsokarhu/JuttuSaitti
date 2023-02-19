@@ -1,13 +1,12 @@
 JuttuSaitti is an online forum, where people can register, create new conversation topics and comment them.
 
-For now, users can register, login, and post topics
+For now, users can register, login, add categories and then topics to them with unique content, and comment on those topics
 
 
 To Do:
-comments
-better environment for the app
 contact page
-etc
+deleting topics and comments
+
 
 How to start it:
 

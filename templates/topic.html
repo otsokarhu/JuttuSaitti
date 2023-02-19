@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block title %}<h2>{{topic.name}}</h2>
+{% endblock %}
+{% block content %}
+  <div class="container" style="justify-content: center">
+    <p>{{topic.content}}</p>
+    <h2>Kommentit</h2>
+    {% if not comments %}
+    <p>Ei vielä kommentteja lisätty!</p>
+    {% endif %}
+    {% if comments %}
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Kommentti</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for comment in comments %}
+        <tr>
+          <td>{{ comment.content }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+     
+    {% endif %}
+    <form action="/topic/{{topic.id}}" method="post" >
+      <div class="container" style="padding: 30px;">
+        <p>
+        <label for="content"><b>Kommentin sisältö</b></label>
+        <input type="text" placeholder="sisältö" name="content" required>
+        </p>
+       
+        <p>
+        <button type="submit">Lisää Kommentti</button>
+        </p>
+           
+      </div>
+              
+    </form>
+  </div>
+{% endblock %}

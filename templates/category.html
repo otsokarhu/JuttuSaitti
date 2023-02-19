@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block title %}<h2>{{category.name}} </h2>{% endblock %}
 {% block content %}
-  <div class="container">
+  <div class="container" style="justify-content: center">
     <h2>Jutut</h2>
     {% if not topics %}
     <p>Ei vielä juttuja lisätty!</p>
@@ -11,30 +11,31 @@
       <thead>
         <tr>
           <th>Juttu</th>
-          <th>Kirjoittaja</th>
         </tr>
       </thead>
       <tbody>
         {% for topic in topics %}
         <tr>
-          <td><a href="/topic/{{ topic.id }}">{{ topic.title }}</a></td>
-          <td>{{ topic.user.username }}</td>
+          <td><a href="/topic/{{ topic.id }}">{{ topic.name }}</a></td>
+        </tr>
+        <tr>
+          <td>{{ topic.content }}</td>
         </tr>
         {% endfor %}
       </tbody>
     </table>
     
     {% endif %}
-    <form method="post" >
+    <form action="/category/{{category.id}}" method="post" >
       <div class="container" style="padding: 30px;">
         <p>
         <label for="title"><b>Jutun otsikko</b></label>
-        <input type="text" placeholder="Jutun otsikko" name="title" required>
+        <input type="text" placeholder="otsikko" name="title" required>
         </p>
       
         <p>
         <label for="content"><b>Jutun sisältö</b></label>
-        <input type="text" placeholder="Jutun sisältö" name="content" required>
+        <input type="text" placeholder="sisältö" name="content" required>
         </p>
       
         <p>

@@ -12,7 +12,7 @@ def add_category(name):
 
 
 def add_topic(name, content, category_id, created_by):
-    sql = text("INSERT INTO topics (name, content, category_id, created_by) VALUES (:name, :content, :category_id, :created_by)")
+    sql = text("INSERT INTO topic (name, content, category_id, created_by) VALUES (:name, :content, :category_id, :created_by)")
     db.session.execute(sql, {"name": name, "content": content,
                        "category_id": category_id, "created_by": created_by, })
     db.session.commit()
@@ -32,6 +32,28 @@ def get_category(id):
 
 def get_topics(id):
     sql = text(
-        "SELECT id, name, content, category_id, created_by, timestamp FROM topics WHERE category_id=:id")
+        "SELECT id, name, content, category_id, created_by FROM topic WHERE category_id=:id")
     result = db.session.execute(sql, {"id": id})
+    return result.fetchall()
+
+
+def get_topic(id):
+    sql = text(
+        "SELECT id, name, content, category_id, created_by FROM topic WHERE id=:id")
+    result = db.session.execute(sql, {"id": id})
+    return result.fetchone()
+
+
+def add_comment(content, topic_id, created_by):
+    sql = text(
+        "INSERT INTO comment (content, topic_id, created_by) VALUES (:content, :topic_id, :created_by)")
+    db.session.execute(
+        sql, {"content": content, "topic_id": topic_id, "created_by": created_by})
+    db.session.commit()
+
+
+def get_comments(topic_id):
+    sql = text(
+        "SELECT id, content, topic_id, created_by FROM comment WHERE topic_id=:topic_id")
+    result = db.session.execute(sql, {"topic_id": topic_id})
     return result.fetchall()
