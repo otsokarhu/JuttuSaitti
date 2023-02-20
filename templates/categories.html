@@ -16,7 +16,11 @@
       {% for category in categories %}
       <tr>
         <td><a href="/category/{{ category.id }}">{{ category.name }}</a></td>
+    
+      {% if session.user_name == 'otso' %}
+        <td><a href="/category/{{ category.id }}/delete">Poista JuttuKategoria</a></td>
       </tr>
+      {% endif %}
       {% endfor %}
     </tbody>
   </table>

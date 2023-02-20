@@ -6,12 +6,15 @@
   <div class="header">
     <h1 style="border: rgb(0, 0, 0); border-radius: 10px;">Juttusaitti</h1>
     {% if session.user_id %}
-    <p>{{ session.user_name }} kirjatuneena sisään</p>
     <a href="/">Etusivu</a>
     <a href="/logout">Kirjaudu ulos</a>
     <a href="/categories">Juttu-kategoriat</a>
     <a href="/about">Tietoa</a>
+    {% if session.user_name == 'otso' %}
+    <a href="/contactrequests">Katso yhteydenottopyynnöt</a>
+    {% endif %}
     <a href="/contact">Ota yhteyttä</a>
+    <p>{{ session.user_name }} kirjatuneena sisään</p>
   {% else %}
 
   <div class="topnav">

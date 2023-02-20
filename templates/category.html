@@ -1,23 +1,29 @@
 {% extends "base.html" %}
 {% block title %}<h2>{{category.name}} </h2>{% endblock %}
 {% block content %}
-  <div class="container" style="justify-content: center">
-    <h2>Jutut</h2>
+  <div class="container" style="justify-items: center;">
     {% if not topics %}
     <p>Ei vielä juttuja lisätty!</p>
     {% endif %}
     {% if topics %}
-    <table class="table table-striped">
+    <table>
       <thead>
         <tr>
-          <th>Juttu</th>
+          <th>Jutut</th>
         </tr>
       </thead>
       <tbody>
         {% for topic in topics %}
         <tr>
-          <td><a href="/topic/{{ topic.id }}">{{ topic.name }}</a></td>
+          <td><a href="topic/{{ topic.id }}">{{ topic.name }}</a>
+          </td>
         </tr>
+        <tr>
+          <td>
+          {% if topic.created_by == session.user_id %}
+          <a href="topic/{{topic.id}}/delete">Poista Juttu</a>
+          {% endif %}</tr>
+        </td>
         <tr>
           <td>{{ topic.content }}</td>
         </tr>
@@ -34,8 +40,7 @@
         </p>
       
         <p>
-        <label for="content"><b>Jutun sisältö</b></label>
-        <input type="text" placeholder="sisältö" name="content" required>
+          <textarea id="content" name="content" placeholder="Aihe.." style="height:200px"></textarea>
         </p>
       
         <p>

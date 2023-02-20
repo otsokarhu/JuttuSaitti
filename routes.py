@@ -2,6 +2,7 @@ from app import app
 from flask import render_template, request, redirect, session
 import users
 import topics
+import contacts
 from db import db
 
 
@@ -56,9 +57,23 @@ def register():
     return redirect('/login')
 
 
-@app.route('/contact')
+@app.route('/contact', methods=['GET', 'POST'])
 def contact():
-    return render_template('contact.html')
+    if request.method == 'GET':
+        return render_template('contact.html')
+    if request.method == 'POST':
+        name = request.form['name']
+        email = request.form['email']
+        message = request.form['subject']
+        contacts.add_contact_request(name, email, message)
+        return redirect('/')
+
+
+@app.route('/contactrequests', methods=['GET'])
+def contactrequests():
+    if request.method == 'GET':
+        contactrequests = contacts.get_contact_requests()
+        return render_template('contact_requests.html', contact_requests=contactrequests)
 
 
 @app.route('/categories', methods=['GET'])
@@ -83,6 +98,12 @@ def category(id):
         return redirect('/category/' + str(id))
 
 
+@app.route('/category/<int:id>/delete', methods=['GET'])
+def delete_category(id):
+    topics.delete_category(id)
+    return redirect('/categories')
+
+
 @app.route('/category/add', methods=['GET', 'POST'])
 def add_category():
     if request.method == 'GET':
@@ -93,7 +114,7 @@ def add_category():
         return redirect('/categories')
 
 
-@app.route('/topic/<int:id>', methods=['GET', 'POST'])
+@app.route('/category/topic/<int:id>', methods=['GET', 'POST'])
 def topic(id):
     topic = topics.get_topic(id)
     comments = topics.get_comments(id)
@@ -105,6 +126,18 @@ def topic(id):
         category_id = id
         topics.add_comment(content, category_id, created_by)
         return redirect('/topic/' + str(id))
+
+
+@app.route('/topic/<int:id>/comment/<int:comment_id>/delete', methods=['GET'])
+def delete_comment(id, comment_id):
+    topics.delete_comment(comment_id)
+    return redirect('/topic/' + str(id))
+
+
+@app.route('/category/topic/<int:id>/delete', methods=['GET'])
+def delete_topic(id):
+    topics.delete_topic(id)
+    return redirect('/categories')
 
 
 @app.route('/logout')

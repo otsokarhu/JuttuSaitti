@@ -57,3 +57,27 @@ def get_comments(topic_id):
         "SELECT id, content, topic_id, created_by FROM comment WHERE topic_id=:topic_id")
     result = db.session.execute(sql, {"topic_id": topic_id})
     return result.fetchall()
+
+
+def delete_comment(id):
+    sql = text("DELETE FROM comment WHERE id=:id")
+    db.session.execute(sql, {"id": id})
+    db.session.commit()
+
+
+def delete_topic(id):
+    sql = text(
+        "DELETE FROM topic WHERE id=:id")
+    sql2 = text("DELETE FROM comment WHERE topic_id=:id")
+    db.session.execute(sql, {"id": id})
+    db.session.execute(sql2, {"id": id})
+    db.session.commit()
+
+
+def delete_category(id):
+    topics = get_topics(id)
+    for topic in topics:
+        delete_topic(topic[0].id)
+    sql = text("DELETE FROM category WHERE id=:id")
+    db.session.execute(sql, {"id": id})
+    db.session.commit()

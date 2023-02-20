@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}<h2>Palautteet ja yhteydenottopyynnöt </h2>{% endblock %}
+{% block content %}
+{% if session.user_name != 'otso' %}
+<h1 class="text-centered"> Ei oikeuksia tähän sivuun :( </h1>
+{% endif %}
+{% if not contact_requests %}
+<h1 class="text-centered"> Ei vielä palautteita tai yhteydenottopyyntöjä</h1>
+{% endif %}
+{% if contact_requests %}
+{% for contact_request in contact_requests %}
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Lähettäjältä: {{ contact_request.name }}</h5>
+          <h6 class="card-subtitle mb-2 text-muted">Sposti: {{ contact_request.email }}</h6>
+          <p class="card-text">{{ contact_request.message }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endfor %}
+{% endif %}
+{% endblock %}

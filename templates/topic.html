@@ -12,17 +12,20 @@
     <table class="table table-striped">
       <thead>
         <tr>
-          <th>Kommentti</th>
+          <th>Käyttäjien kommentit </th>
         </tr>
       </thead>
       <tbody>
         {% for comment in comments %}
         <tr>
           <td>{{ comment.content }}</td>
+          {% if comment.created_by == session.user_id %}
+          <td><a href="/topic/{{topic.id}}/comment/{{ comment.id }}/delete">Poista</a></td>
+          {% endif %}
         </tr>
         {% endfor %}
       </tbody>
-    </table>
+    </table>  
      
     {% endif %}
     <form action="/topic/{{topic.id}}" method="post" >
