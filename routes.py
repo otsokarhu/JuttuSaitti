@@ -123,15 +123,15 @@ def topic(id):
     if request.method == 'POST':
         content = request.form['content']
         created_by = session['user_id']
-        category_id = id
-        topics.add_comment(content, category_id, created_by)
-        return redirect('/topic/' + str(id))
+        topic_id = id
+        topics.add_comment(content, topic_id, created_by)
+        return redirect('/category/topic/' + str(id))
 
 
 @app.route('/topic/<int:id>/comment/<int:comment_id>/delete', methods=['GET'])
 def delete_comment(id, comment_id):
     topics.delete_comment(comment_id)
-    return redirect('/topic/' + str(id))
+    return redirect('/category/topic/' + str(id))
 
 
 @app.route('/category/topic/<int:id>/delete', methods=['GET'])
