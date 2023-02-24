@@ -69,15 +69,29 @@ def delete_topic(id):
     sql = text(
         "DELETE FROM topic WHERE id=:id")
     sql2 = text("DELETE FROM comment WHERE topic_id=:id")
-    db.session.execute(sql, {"id": id})
     db.session.execute(sql2, {"id": id})
+    db.session.execute(sql, {"id": id})
     db.session.commit()
 
 
 def delete_category(id):
     topics = get_topics(id)
     for topic in topics:
-        delete_topic(topic[0].id)
+        delete_topic(topic[0])
     sql = text("DELETE FROM category WHERE id=:id")
     db.session.execute(sql, {"id": id})
     db.session.commit()
+
+
+def get_topic_count():
+    sql = text(
+        "SELECT COUNT(*) FROM topic")
+    result = db.session.execute(sql)
+    return result.fetchone()[0]
+
+
+def get_category_count():
+    sql = text(
+        "SELECT COUNT(*) FROM category")
+    result = db.session.execute(sql)
+    return result.fetchone()[0]

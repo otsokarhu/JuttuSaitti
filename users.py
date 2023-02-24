@@ -6,21 +6,20 @@ from werkzeug.security import check_password_hash, generate_password_hash
 from sqlalchemy.sql import text
 
 
-def register(username, password):
-    print("Registering user", username, password)
+def register(username, password, admin):
     hash_value = generate_password_hash(password)
 
     sql = text(
-        "INSERT INTO users (username, password) VALUES (:username, :password)")
+        "INSERT INTO users (username, password, admin) VALUES (:username, :password, :admin)")
     db.session.execute(
-        sql, {"username": username, "password": hash_value})
+        sql, {"username": username, "password": hash_value, "admin": admin})
     db.session.commit()
 
     return True
 
 
 def login(username, password):
-    sql = text("SELECT id, password FROM users WHERE username=:username")
+    sql = text("SELECT id, password, admin FROM users WHERE username=:username")
     result = db.session.execute(sql, {"username": username})
     user = result.fetchone()
     if not user:
@@ -32,6 +31,8 @@ def login(username, password):
         session["user_id"] = user[0]
         session["user_name"] = username
         session["csrf_token"] = secrets.token_hex(16)
+        session["admin"] = user[2]
+        print(user)
         return True
 
 
@@ -42,6 +43,12 @@ def get_user_id():
 def get_username(id):
     sql = text("SELECT username FROM users WHERE id=:id")
     result = db.session.execute(sql, {"id": id})
+    return result.fetchone()[0]
+
+
+def get_user_count():
+    sql = text("SELECT COUNT(*) FROM users")
+    result = db.session.execute(sql)
     return result.fetchone()[0]
 
 

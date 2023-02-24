@@ -1,5 +1,9 @@
 {% extends "base.html" %}
-{% block title %}<h2>Tervetuloa JuttuSaitille </h2>{% endblock %}
+{% block title %}<h2>Tervetuloa JuttuSaitille </h2>
+{% if usercount > 0 %}
+<h4>Täältä löytyy jo {{categorycount}} Juttukategoriaa, joissa on yhteensä {{topiccount}} Juttua, käyttäjiä täältä löytyy {{usercount}}</h4>
+{% endif %}
+{% endblock %}
 {% block content %}
 {% if not session.user_id %}
     <p>Kirjaudu sisään tai rekisteröidy, jutellaksesi muiden käyttäjien kanssa!</p>

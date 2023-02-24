@@ -8,7 +8,10 @@ from db import db
 
 @app.route('/')
 def index():
-    return render_template('homepage.html')
+    topiccount = topics.get_topic_count()
+    usercount = users.get_user_count()
+    categorycount = topics.get_category_count()
+    return render_template('homepage.html', topiccount=topiccount, usercount=usercount, categorycount=categorycount)
 
 
 @app.route('/about')
@@ -40,6 +43,7 @@ def register():
         username = request.form['username']
         password = request.form['password']
         password2 = request.form['password-repeat']
+        adminform = request.form.get('adminform')
         if password != password2:
             return render_template('error.html', message="Passwords do not match", route="/register")
         if len(username) < 4:
@@ -51,10 +55,15 @@ def register():
         if len(username) == 0:
             return render_template('error.html', message="Username cannot be empty", route="/register")
 
-    if not users.register(username, password):
-        return render_template('error.html', message="Rekisteröityminen ei onnistunut", route="/register")
+        admin = False
+        if adminform == '1':
+            admin = True
 
-    return redirect('/login')
+        print(admin)
+        if not users.register(username, password, admin):
+            return render_template('error.html', message="Rekisteröityminen ei onnistunut", route="/register")
+
+        return redirect('/login')
 
 
 @app.route('/contact', methods=['GET', 'POST'])

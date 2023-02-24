@@ -10,7 +10,7 @@
     <a href="/logout">Kirjaudu ulos</a>
     <a href="/categories">Juttu-kategoriat</a>
     <a href="/about">Tietoa</a>
-    {% if session.user_name == 'otso' %}
+    {% if session.admin %}
     <a href="/contactrequests">Katso yhteydenottopyynnöt</a>
     {% endif %}
     <a href="/contact">Ota yhteyttä</a>
