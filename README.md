@@ -1,6 +1,6 @@
 JuttuSaitti is an online forum, where people can register, create new conversation topics and comment them.
 
-For now, users can register, login, add categories and then topics to them with unique content, and comment on those topics, and delete topics and comments. Admin can delete categories (admin's username is 'otso' and password is 'salasana'), Admin can also see contact requests.
+For now, users can register, login, add categories and then topics to them with unique content, and comment on those topics, and delete topics and comments. Admin can delete categories, Admin can also see contact requests.
 
 
 
